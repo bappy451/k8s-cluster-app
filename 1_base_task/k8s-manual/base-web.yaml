@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: base-web
+  labels:
+    app: base-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: base-web
+  template:
+    metadata:
+      labels:
+        app: base-web
+    spec:
+      containers:
+      - name: base-web
+        image: base-web:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: base-web-service
+spec:
+  selector:
+    app: base-web
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+      nodePort: 30000
+

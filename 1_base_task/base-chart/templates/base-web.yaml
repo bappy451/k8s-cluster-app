@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: base-web
+  labels:
+    app: base-web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: base-web
+  template:
+    metadata:
+      labels:
+        app: base-web
+    spec:
+      containers:
+      - name: base-web
+        image: base-web:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
+
+
+

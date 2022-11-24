@@ -1,0 +1,15 @@
+version: '3'
+
+services: 
+    web:
+        container_name: base-web
+        build: .
+        restart: always
+        # command: >
+        #     bash -c "python manage.py makemigrations
+        #     && python manage.py migrate
+        #     && python manage.py runserver 0.0.0.0:8000" 
+        volumes: 
+            - .:/code
+        ports: 
+            - 80:8000
